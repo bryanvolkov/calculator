@@ -9,16 +9,15 @@ object Calculator {
     var input = scanner.nextLine()
     while(input != ""){
       if(automaton.check_string(input)){
-        print("Accepted")
+        //print("Accepted")
         tkizer.tokenize(input)
         //print(rpn(input))
       }
-      else print("Rejected")
+      else print("Error")
       
       print("\nEnter expression: ")
       input = scanner.nextLine()
     }
-    
     print("End of program...")
   }
   

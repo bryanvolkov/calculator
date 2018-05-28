@@ -1,12 +1,7 @@
 
-
-class Token{
+class Token(_value:Any, _vtype:Int){
   
-  var value:Any = _
-  var vtype:String = ""
-  def Token(value:Any, vtype:String){
-    this.value = value
-    this.vtype = vtype
-  }
+  var value:Any = _value
+  var vtype:Int = _vtype
   
 }

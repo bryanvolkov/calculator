@@ -5,8 +5,13 @@ import scala.collection.mutable.Queue
 
 class Tokenizer {
   
+  val NUMBER:Int = 0
+  val OPERATOR:Int = 1
+  val OPEN_PARENTHESIS:Int = 2
+  val CLOSING_PARENTHESIS:Int = 3
+  
   def tokenize(expression: String):Queue[Token] = {
-    val queue = new Queue[Token]
+    var queue = new Queue[Token]
     var start:Int = 0 // index of initial character
     var i:Int = 0
     while(i < expression.length){
@@ -14,17 +19,22 @@ class Tokenizer {
         start = i
         i+=1
         while(i < expression.length && is_number(expression.charAt(i))) i+=1
-        println(expression.substring(start, i))
+        println(expression.substring(start, i).toDouble)
+        queue +=  new Token(expression.substring(start, i).toDouble, NUMBER)
       }
       else{
         if(is_operator(expression.charAt(i))){
           println(expression.charAt(i))
+          queue +=  new Token(expression.substring(start, i), OPERATOR)
         }
         else if(expression.charAt(i) == '('){
           println(expression.charAt(i))
+          queue +=  new Token(expression.substring(start, i), OPEN_PARENTHESIS)
         }
-        else
+        else{
           println(expression.charAt(i))
+          queue +=  new Token(expression.substring(start, i), CLOSING_PARENTHESIS)
+        }
         i+=1
       }
     }
