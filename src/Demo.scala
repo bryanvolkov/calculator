@@ -6,11 +6,14 @@ object HelloWorld {
     val scanner = new java.util.Scanner(System.in)
     print("Enter array size: ")
     var list:Array[Int] = new Array[Int](scanner.nextInt())
+    println("Populating...")
     fill_array(list)
-    print_array(list)
+    println("Sorting...")
+    //print_array(list)
     quickSort(list)
-    println()
-    print_array(list)
+    println("Done..")
+  //  println()
+   // print_array(list)
   }
   
   def quickSort(arr:Array[Int]){
@@ -27,14 +30,13 @@ object HelloWorld {
   
   def partition(arr:Array[Int], low: Int, high: Int):Int = {
     var j:Int =  low
-    for(i <- low+1 to high){
+    for(i <- low+1 to high)
       if(arr(i) < arr(low)){
         j+=1
         var temp:Int = arr(i)
         arr(i) = arr(j)
         arr(j) = temp
       }
-    }
     var temp:Int = arr(low)
     arr(low) = arr(j)
     arr(j) = temp    

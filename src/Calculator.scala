@@ -4,12 +4,17 @@ object Calculator {
   def main(args: Array[String]){
     val scanner = new java.util.Scanner(System.in)
     val automaton: Automaton = new Automaton
+    val tkizer: Tokenizer = new Tokenizer
     print("Enter expression: ")
     var input = scanner.nextLine()
     while(input != ""){
-      if(automaton.check_string(input)) print("Accepted")
+      if(automaton.check_string(input)){
+        print("Accepted")
+        tkizer.tokenize(input)
+        //print(rpn(input))
+      }
       else print("Rejected")
-      //print(rpn(input))
+      
       print("\nEnter expression: ")
       input = scanner.nextLine()
     }

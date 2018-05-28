@@ -23,13 +23,15 @@ class Automaton {
   private var stk:Stack[Char] = new Stack[Char]
   
   private def is_number(c:Char):Boolean = {
-    c >= '0' && c <= '9'
+     '0' <= c && c <= '9'
   }
   
   private def is_operator(c:Char):Boolean = {
     c == '-' || c == '+' || c == '/' || c == '*'
   }
+  
   private var state = q0
+  
   def check_string(str:String):Boolean = {
     state = q0
     stk.push('$')
@@ -131,7 +133,7 @@ class Automaton {
     else if(c == ')'){
         if(stk.pop()!='(') return false
         state = q8}
-    else if(c == '.') return false // BUG FIXED: dot after parenthesis is now rejected i.e. "(3)."
+    else if(c == '.') return false // BUG FIXED: expressions with dot after parenthesis is now rejected i.e. "(3)."
     true
     }
 }
