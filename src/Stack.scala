@@ -16,7 +16,7 @@ class Stack[T]{
     length+=1
   }
   
-  def empty():Boolean = {
+  def isEmpty():Boolean = {
     if(length == 0) true
     else false
   }

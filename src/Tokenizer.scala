@@ -1,5 +1,5 @@
 import scala.collection.mutable.Queue
-//23423.23+2343
+
 class Tokenizer {
   val NUMBER:Int = 0
   val OPERATOR:Int = 1

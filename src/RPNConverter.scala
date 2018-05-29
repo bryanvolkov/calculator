@@ -1,14 +1,13 @@
 import scala.collection.mutable.Stack
 import scala.collection.mutable.Queue
-import scala.math.Ordering.UnitOrdering
 
-class RPNConverter extends UnitOrdering{
+class RPNConverter{
   val NUMBER:Int = 0
   val OPERATOR:Int = 1
   val OPEN_PARENTHESIS:Int = 2
   val CLOSING_PARENTHESIS:Int = 3
 
-  def toRPD(tokens: Queue[Token]): Queue[Token] = {
+  def toRPN(tokens: Queue[Token]): Queue[Token] = {
      var stack = Stack[Token]()
     var queue = Queue[Token]()
     for(i <- tokens) {
@@ -19,7 +18,7 @@ class RPNConverter extends UnitOrdering{
         if(stack.isEmpty)
           stack.push(token)
         else {
-          while(!stack.isEmpty && checkPrecedence(stack.top.value.toString()) > checkPrecedence(token.vtype.toString())) //{
+          while(!stack.isEmpty && checkPrecedence(stack.top.value.toString()) > checkPrecedence(token.vtype.toString()))
             queue.enqueue(stack.pop())
           stack.push(token)
         }
@@ -27,16 +26,16 @@ class RPNConverter extends UnitOrdering{
       else if(token.vtype == OPEN_PARENTHESIS)
           stack.push(token)
       else if(token.vtype == CLOSING_PARENTHESIS) {
-          while(stack.top.vtype != OPEN_PARENTHESIS)
-            queue.enqueue(stack.pop())
+          while(stack.top.vtype != OPEN_PARENTHESIS) queue.enqueue(stack.pop())
           stack.pop()
         }
       else
         print("Token: " + token.value.toString() + " not identified, disregarding...\n")
     }
     while(!stack.isEmpty)
-      //if(stack.top.value.toString() != "(")
-        queue.enqueue(stack.pop())
+      if(stack.top.value.toString() == "(")
+        stack.pop()
+      else queue.enqueue(stack.pop())
     queue
   }
 
