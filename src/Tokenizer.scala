@@ -1,10 +1,6 @@
 import scala.collection.mutable.Queue
-
-
 //23423.23+2343
-
 class Tokenizer {
-  
   val NUMBER:Int = 0
   val OPERATOR:Int = 1
   val OPEN_PARENTHESIS:Int = 2
@@ -19,22 +15,14 @@ class Tokenizer {
         start = i
         i+=1
         while(i < expression.length && is_number(expression.charAt(i))) i+=1
-        println(expression.substring(start, i).toDouble)
-        queue +=  new Token(expression.substring(start, i).toDouble, NUMBER)
+        queue.enqueue(new Token(expression.substring(start, i).toDouble, NUMBER))
       }
       else{
-        if(is_operator(expression.charAt(i))){
-          println(expression.charAt(i))
-          queue +=  new Token(expression.substring(start, i), OPERATOR)
-        }
-        else if(expression.charAt(i) == '('){
-          println(expression.charAt(i))
-          queue +=  new Token(expression.substring(start, i), OPEN_PARENTHESIS)
-        }
-        else{
-          println(expression.charAt(i))
-          queue +=  new Token(expression.substring(start, i), CLOSING_PARENTHESIS)
-        }
+        if(is_operator(expression.charAt(i)))
+          queue.enqueue(new Token(expression.charAt(i), OPERATOR))
+        else if(expression.charAt(i) == '(')
+          queue.enqueue(new Token(expression.charAt(i), OPEN_PARENTHESIS))
+        else queue.enqueue(new Token(expression.charAt(i), CLOSING_PARENTHESIS))
         i+=1
       }
     }
