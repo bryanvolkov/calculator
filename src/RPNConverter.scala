@@ -17,8 +17,9 @@ class RPNConverter{
       else if(token.vtype == OPERATOR) {
         if(stack.isEmpty)
           stack.push(token)
-        else {
-          while(!stack.isEmpty && checkPrecedence(stack.top.value.toString()) > checkPrecedence(token.vtype.toString()))
+        else{
+          if(!stack.isEmpty && checkPrecedence(stack.top.value.toString()) >= checkPrecedence(token.value.toString()))
+          while(!stack.isEmpty && stack.top.vtype != OPEN_PARENTHESIS)
             queue.enqueue(stack.pop())
           stack.push(token)
         }

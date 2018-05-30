@@ -16,9 +16,9 @@ object Calculator {
         var queue:Queue[Token] = tkizer.tokenize(input)
         queue = rpnconverter.toRPN(queue)
         var result: Double = evaluator.evaluate(queue)
-//        for(i <- queue)
-//          print(i.value + " ")
-//        println("")
+        for(i <- queue)
+          print(i.value + " ")
+        println("")
         println(result)
       }
       else println("Error")
