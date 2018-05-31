@@ -7,7 +7,7 @@ import scala.util.control.Breaks._
 // ( )
 // .
 
-class Automaton {
+class InputAnalyzer {
   private val q0 = 0
   private val q1 = 1
   private val q2 = 2
@@ -32,7 +32,7 @@ class Automaton {
   
   private var state = q0
   
-  def check_string(str:String):Boolean = {
+  def analyze(str:String):Boolean = {
     state = q0
     stk.push('$')
     var accept:Boolean = true

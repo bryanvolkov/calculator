@@ -4,7 +4,7 @@ import scala.collection.mutable.Queue
 object Calculator {
   def main(args: Array[String]){
     val scanner = new java.util.Scanner(System.in)
-    val automaton = new Automaton
+    val inputAnalyzer = new InputAnalyzer
     val tkizer = new Tokenizer
     val rpnconverter = new RPNConverter
     val evaluator = new Evaluator
@@ -12,7 +12,7 @@ object Calculator {
     var input = scanner.nextLine()
     while(input != ""){
       input = sanitize(input)
-      if(automaton.check_string(input)){
+      if(inputAnalyzer.analyze(input)){
         var queue:Queue[Token] = tkizer.tokenize(input)
         queue = rpnconverter.toRPN(queue)
         var result: Double = evaluator.evaluate(queue)
@@ -29,7 +29,7 @@ object Calculator {
     print("End of program...")
   }
   
-    def sanitize(str:String): String = {
+   def sanitize(str:String): String = {
     var res:String = ""
     for(i <- 0 until str.length)
       if(str.charAt(i) != ' ')
