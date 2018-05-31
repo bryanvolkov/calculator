@@ -30,14 +30,14 @@ class RPNConverter{
   }
   
   private def ifOperator(token: Token){
-    if(stack.isEmpty)
+    if(stack.isEmpty){
       stack.push(token)
-    else{
-      if(!stack.isEmpty && checkPrecedence(stack.peek.value.toString()) >= checkPrecedence(token.value.toString()))
-        while(!stack.isEmpty && stack.peek.vtype != OPEN_PARENTHESIS)
-          queue.enqueue(stack.pop())
-      stack.push(token)
-    }
+      return}
+    
+    if(!stack.isEmpty && checkPrecedence(stack.peek.value.toString()) >= checkPrecedence(token.value.toString()))
+      while(!stack.isEmpty && stack.peek.vtype != OPEN_PARENTHESIS)
+        queue.enqueue(stack.pop())
+    stack.push(token)
   }
   
   private def ifOpenParenthesis(token: Token){
