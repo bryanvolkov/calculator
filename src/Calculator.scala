@@ -1,7 +1,10 @@
 import scala.util.control.Breaks._
 import scala.collection.mutable.Queue
+import scala.math._
 
 object Calculator {
+  private val NUMBER:Int = 0
+  private val OPERATOR:Int = 1
   def main(args: Array[String]){
     val scanner = new java.util.Scanner(System.in)
     val inputAnalyzer = new InputAnalyzer
@@ -18,7 +21,7 @@ object Calculator {
         var queue:Queue[Token] = tkizer.tokenize(input) // tokenize the input
         queue = rpnconverter.toRPN(queue) // arrange tokens in RPN
         printRPN(queue)
-        println(evaluator.evaluate(queue)) // evaluate RPN expression and print it
+        println("Res: " + doubleToIntFormat(evaluator.evaluate(queue))) // evaluate RPN expression and print it
       }
       else println("Error")
       
@@ -29,9 +32,24 @@ object Calculator {
   }
   
   def printRPN(queue:Queue[Token]){
+    print("RPN: ")
     for(token <- queue)
-      print(token.value.toString() + " ")
+      if(token.vtype == NUMBER)
+        print(doubleToIntFormat(token.value.asInstanceOf[Double]) + " ")
+      else print(token.value.toString() + " ")
     println("")
+  }
+  
+  def doubleToIntFormat(num: Double): String = {
+    var d = num - floor(num)
+    var res = ""
+    if(d < 1 && d > 0 || d < 0 && d > -1)
+      res = num.toString()
+    else{
+      res = floor(num).toString() 
+      res = res.substring(0,res.length-2)
+    }
+    res
   }
   
    def sanitize(str:String): String = {

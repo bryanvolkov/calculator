@@ -1,0 +1,81 @@
+2*2*(1+2+3+4-1)
+36
+
+1+2+3*4+5
+20
+
+5+6+9/3-6-9
+-1
+
+(
+
+template <typename T>
+class Node{
+	Node(const T& value);
+};
+
+
+import scala.collection.mutable.Queue
+
+class Evaluator {
+  private val NUMBER:Int = 0
+  private val OPERATOR:Int = 1
+  
+  var stack = new Stack[Double]
+  
+  private val whatToDo: Map[Char, () => Unit] = Map('+' -> add, '-' -> sub, '*' -> mult, '/' -> div)
+  
+  def evaluate(queue: Queue[Token]):Double = {
+    stack = new Stack[Double]
+    for(token <- queue){              
+      if(token.vtype == OPERATOR){
+        var s = token.value.asInstanceOf[Char]
+        whatToDo(s)()
+//        if(s == '+'){
+//          var second = stack.pop()
+//          var first = stack.pop()
+//          stack.push(first + second)
+//        }else if(s == '-'){
+//          var second = stack.pop()
+//          var first = stack.pop()
+//          stack.push(first - second)
+//        }else if(s == '*'){
+//          var second = stack.pop()
+//          var first = stack.pop()
+//          stack.push(first * second)
+//        }else if(s == '/'){
+//          var second = stack.pop()
+//          var first = stack.pop()
+//          stack.push(first / second)
+//        }
+      }
+      else if(token.vtype == NUMBER)
+          stack.push(token.value.asInstanceOf[Double])
+    }
+    stack.pop()
+  }
+  
+  private def add(){
+              var second = stack.pop()
+          var first = stack.pop()
+          stack.push(first + second)
+  }
+  
+  private def sub(){
+              var second = stack.pop()
+          var first = stack.pop()
+          stack.push(first - second)
+  }
+  
+  private def mult(){
+              var second = stack.pop()
+          var first = stack.pop()
+          stack.push(first * second)
+  }
+    
+  private def div(){
+              var second = stack.pop()
+          var first = stack.pop()
+          stack.push(first / second)
+  }
+}

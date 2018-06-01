@@ -57,7 +57,7 @@ class RPNConverter{
     var pres: Int = 0
     if(input == "+" || input == "-") pres = low
     else if(input == "*" || input == "/") pres = med
-    else if(input == "^") pres = hi
+    else if(input == "~" || input == "-") pres = hi
     pres
   }
 }
